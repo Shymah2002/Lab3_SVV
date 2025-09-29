@@ -48,40 +48,44 @@ on:
 
 jobs:
   build:
+    runs-on: windows-latest
     strategy:
       matrix:
-        configuration: [Debug, Release]
-    runs-on: windows-latest
-    defaults:
-      run:
-        working-directory: ./ICT3101_Calculator/
+        configuration: [ Debug, Release ]
+
     env:
       Solution_Name: ICT3101_Calculator.sln
-      NUnit_Test_Project_Path: ICT3101_Calculator.UnitTests/
-      SpecFlow_Test_Project_Path: SpecFlowCalculatorTests/
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-    - name: Install .NET Core
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v2
-    - name: Restore the application
-      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
-      env:
-        Configuration: ${{ matrix.configuration }}
-    - name: Build the solution
-      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration
-      env:
-        Configuration: ${{ matrix.configuration }}
-    - name: NUnit Tests
-      working-directory: ../ICT3101_Calculator.UnitTests/
-      run: dotnet test --no-build --verbosity normal
-    - name: SpecFlow Tests
-      working-directory: ../SpecFlowCalculatorTests/
-      run: dotnet test --no-build --verbosity normal
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Restore the application
+        working-directory: ICT3101_Calculator
+        run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+        env:
+          Configuration: ${{ matrix.configuration }}
+
+      - name: Build the solution
+        working-directory: ICT3101_Calculator
+        run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration
+        env:
+          Configuration: ${{ matrix.configuration }}
+
+      - name: NUnit Tests
+        working-directory: ICT3101_Calculator.UnitTests
+        run: dotnet test --no-build --verbosity normal
+
+      - name: SpecFlow Tests
+        working-directory: SpecFlowCalculatorTests
+        run: dotnet test --no-build --verbosity normal
