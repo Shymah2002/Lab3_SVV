@@ -57,6 +57,9 @@ jobs:
         working-directory: ./ICT3101_Calculator/
     env:
       Solution_Name: ICT3101_Calculator.sln
+      NUnit_Test_Project_Path: ICT3101_Calculator.UnitTests/
+      SpecFlow_Test_Project_Path: SpecFlowCalculatorTests/
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
