@@ -1,7 +1,7 @@
 namespace ICT3101_Calculator.UnitTests
 {
     //This calculator test, is validating if the methods works
-    //Does not affect your actual app
+    //Does not affect your actual apps
     public class CalculatorTests
     {
         private Calculator _calculator;
