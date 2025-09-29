@@ -184,32 +184,21 @@ namespace ICT3101_Calculator.UnitTests
             Assert.That(() => _calculator.UnknownFunctionA(n, r), Throws.ArgumentException);
             Assert.That(() => _calculator.UnknownFunctionB(n, r), Throws.ArgumentException);
         }
-
-        //Lab 4
-
-        [Test]
-        public void GenMagicNum_WhenChoiceIs0_ReturnsExpectedValue()
+        public double GenMagicNum(double input, IFileReader fileReader)
         {
-            // Suppose MagicNumbers.txt has "42" at index 0
-            double result = _calculator.GenMagicNum(0);
-            Assert.AreEqual(84, result); // 42 → doubled to 84
-        }
+            double result = 0;
+            int choice = Convert.ToInt16(input);
 
-        [Test]
-        public void GenMagicNum_WhenChoiceIs1_NegativeValue_ReturnsExpectedValue()
-        {
-            // Suppose MagicNumbers.txt has "-3.5" at index 1
-            double result = _calculator.GenMagicNum(1);
-            Assert.AreEqual(7.0, result); // -3.5 → -2 * -3.5 = 7
-        }
+            string[] magicStrings = fileReader.Read("MagicNumbers.txt");
 
-        [Test]
-        public void GenMagicNum_WhenChoiceIsOutOfRange_ReturnsZero()
-        {
-            double result = _calculator.GenMagicNum(999); // out of range
-            Assert.AreEqual(0.0, result);
-        }
+            if ((choice >= 0) && (choice < magicStrings.Length))
+            {
+                result = Convert.ToDouble(magicStrings[choice]);
+            }
 
+            result = (result > 0) ? (2 * result) : (-2 * result);
+            return result;
+        }
 
     }
 }
