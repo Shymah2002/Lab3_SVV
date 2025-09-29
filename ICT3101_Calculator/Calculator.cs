@@ -1,7 +1,7 @@
 ﻿public class Calculator
 {
     public Calculator() { }
-    public double DoOperation(double num1, double num2, double num3, string op) 
+    public double DoOperation(double num1, double num2, double num3, string op)
     {
         double result = double.NaN; // Default value
                                     // Use a switch statement to do the math.
@@ -40,7 +40,7 @@
                 break;
             case "w" +
             "":
-                result = MTBF(num1,num2);
+                result = MTBF(num1, num2);
                 break;
             case "z" +
             "":
@@ -127,7 +127,7 @@
 
     public double AreaofTriangle(double height, double length)
     {
-        if(height < 0 || length < 0) throw new ArgumentException("Cannot be negative number");
+        if (height < 0 || length < 0) throw new ArgumentException("Cannot be negative number");
         return 0.5 * height * length;
     }
 
@@ -135,7 +135,7 @@
     {
         if (radius < 0) throw new ArgumentException("Cannot be negative number");
         return Math.PI * radius * radius;
-       
+
     }
 
     public double UnknownFunctionA(int n, int r) // Permutation
@@ -224,7 +224,7 @@
         //if (theta <= 0) throw new ArgumentException("θ must be positive");
         //return theta * (1 - Math.Exp(-(lambda0 / theta) * tau));
 
-       //  return Math.Round(theta * (1 - Math.Exp(-(lambda0 / theta) * tau)), 2);
+        //  return Math.Round(theta * (1 - Math.Exp(-(lambda0 / theta) * tau)), 2);
         if (lambda0 < 0 || theta <= 0 || tau < 0)
             throw new ArgumentException("Invalid input");
 
@@ -267,4 +267,23 @@
 
         return a * b / (1.0 + b * t);
     }
+
+
+    //LAB 4
+    public double GenMagicNum(double input, IFileReader fileReader)
+    {
+        double result = 0;
+        int choice = Convert.ToInt16(input);
+
+        string[] magicStrings = fileReader.Read("MagicNumbers.txt");
+
+        if ((choice >= 0) && (choice < magicStrings.Length))
+        {
+            result = Convert.ToDouble(magicStrings[choice]);
+        }
+
+        result = (result > 0) ? (2 * result) : (-2 * result);
+        return result;
+    }
+
 }

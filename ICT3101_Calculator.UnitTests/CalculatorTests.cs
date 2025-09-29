@@ -185,6 +185,31 @@ namespace ICT3101_Calculator.UnitTests
             Assert.That(() => _calculator.UnknownFunctionB(n, r), Throws.ArgumentException);
         }
 
+        //Lab 4
+
+        [Test]
+        public void GenMagicNum_WhenChoiceIs0_ReturnsExpectedValue()
+        {
+            // Suppose MagicNumbers.txt has "42" at index 0
+            double result = _calculator.GenMagicNum(0);
+            Assert.AreEqual(84, result); // 42 → doubled to 84
+        }
+
+        [Test]
+        public void GenMagicNum_WhenChoiceIs1_NegativeValue_ReturnsExpectedValue()
+        {
+            // Suppose MagicNumbers.txt has "-3.5" at index 1
+            double result = _calculator.GenMagicNum(1);
+            Assert.AreEqual(7.0, result); // -3.5 → -2 * -3.5 = 7
+        }
+
+        [Test]
+        public void GenMagicNum_WhenChoiceIsOutOfRange_ReturnsZero()
+        {
+            double result = _calculator.GenMagicNum(999); // out of range
+            Assert.AreEqual(0.0, result);
+        }
+
 
     }
 }
