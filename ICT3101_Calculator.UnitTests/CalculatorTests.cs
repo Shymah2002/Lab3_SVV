@@ -48,14 +48,14 @@ namespace ICT3101_Calculator.UnitTests
 
         // ------------------ Division -----------------
         // 4 Test case (1 valid + 3 invalid with number 0)
-        [Test]
-        public void Division_WhenDividingTwoNumbers_ResultEqualToDivide()
-        {
-            // Act
-            double result = _calculator.Divide(10, 2);
-            // Assert
-            Assert.That(result, Is.EqualTo(5));
-        }
+        //[Test]
+        //public void Division_WhenDividingTwoNumbers_ResultEqualToDivide()
+        //{
+        //    // Act
+        //    double result = _calculator.Divide(10, 2);
+        //    // Assert
+        //    Assert.That(result, Is.EqualTo(5));
+        //}
 
         //[Test]
         ////DivisionbyZero
@@ -64,16 +64,37 @@ namespace ICT3101_Calculator.UnitTests
         //    Assert.That(() => _calculator.Divide(10, 0), Throws.ArgumentException);
         //}
 
-        [Test]
-        // Adding more test case to check properly if the method works correctly
-        [TestCase(0, 0)]
-        [TestCase(10, 0)]
-        [TestCase(0, 10)]
-        public void Divide_WithZerosAsInputs_ResultThrowArgumentException(double a, double b)
+        //[Test]
+        //// Adding more test case to check properly if the method works correctly
+        //[TestCase(0, 0)]
+        //[TestCase(10, 0)]
+        //[TestCase(0, 10)]
+        //public void Divide_WithZerosAsInputs_ResultThrowArgumentException(double a, double b)
+        //{
+        //    Assert.That(() => _calculator.Divide(a, b), Throws.ArgumentException);
+        //}
+        [TestCase(0, 0, 1)]
+        [TestCase(10, 0, double.PositiveInfinity)]
+        [TestCase(0, 10, 0)]
+        [TestCase(10, 2, 5)]
+        public void Divide_ValidInputs_ReturnsExpected(double a, double b, double expected)
         {
-            Assert.That(() => _calculator.Divide(a, b), Throws.ArgumentException);
+            // Act
+            double result = _calculator.Divide(a, b);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(expected));
         }
 
+        //// 2️⃣ Division by zero tests (should throw exception)/
+        //[TestCase(0, 0)]
+        //[TestCase(10, 0)]
+        //[TestCase(-5, 0)]
+        //public void Divide_ByZero_ThrowsArgumentException(double a, double b)
+        //{
+        //    // Act & Assert
+        //    Assert.That(() => _calculator.Divide(a, b), Throws.ArgumentException);
+        //}
 
         // ------------------ Factorial -----------------
         // 3 Test case
