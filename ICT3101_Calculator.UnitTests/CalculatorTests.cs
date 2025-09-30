@@ -191,7 +191,7 @@ namespace ICT3101_Calculator.UnitTests
         [Test]
         public void GenMagicNum_Choice0_ReturnsDoubleOf42()
         {
-            // magicNumbers[0] = "42" -> 2 * 42 = 84//
+            // magicNumbers[0] = "42" -> 2 * 42 = 84
             var actual = _calculator.GenMagicNum(0, fileReader);
             Assert.AreEqual(84.0, actual);
         }
