@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public interface IFileReader
+namespace ICT3101_Calculator.UnitTests
 {
-    string[] Read(string path);
+    class AdditionalCalculatorTests
+    {
+    }
 }
