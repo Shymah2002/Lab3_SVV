@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    class FileReader
+public class FileReader : IFileReader
+{
+    public string[] Read(string path)
     {
-        public string[] Read(string path)
-        {
-            return File.ReadAllLines(path);
-        }
+        return File.ReadAllLines(path);
     }
+}
 
