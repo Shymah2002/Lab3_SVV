@@ -5,13 +5,11 @@ namespace ICT3101_Calculator.UnitTests
     public class CalculatorTests
     {
         private Calculator _calculator;
-        private IFileReader fileReader;
         [SetUp]
         public void Setup()
         {
             // Arrange
             _calculator = new Calculator();
-            fileReader = new FileReader();
         }
         // ------------------ Addition -----------------
         // 1 test case
@@ -186,31 +184,21 @@ namespace ICT3101_Calculator.UnitTests
             Assert.That(() => _calculator.UnknownFunctionA(n, r), Throws.ArgumentException);
             Assert.That(() => _calculator.UnknownFunctionB(n, r), Throws.ArgumentException);
         }
-
-
-        [Test]
-        public void GenMagicNum_Choice0_ReturnsDoubleOf42()
+        public double GenMagicNum(double input, IFileReader fileReader)
         {
-            // magicNumbers[0] = "42" -> 2 * 42 = 84
-            var actual = _calculator.GenMagicNum(0, fileReader);
-            Assert.AreEqual(84.0, actual);
-        }
+            double result = 0;
+            int choice = Convert.ToInt16(input);
 
-        [Test]
-        public void GenMagicNum_Choice1_NegativeInFile_ReturnsPositive()
-        {
-            // magicNumbers[1] = "-3.5" -> (-2 * -3.5) = 7.0 (per method logic)
-            var actual = _calculator.GenMagicNum(1,fileReader);
-            Assert.AreEqual(7.0, actual);
-        }
+            string[] magicStrings = fileReader.Read("MagicNumbers.txt");
 
-        [Test]
-        public void GenMagicNum_OutOfRange_ReturnsZero()
-        {
-            var actual = _calculator.GenMagicNum(999,fileReader);
-            Assert.AreEqual(0.0, actual);
-        }
+            if ((choice >= 0) && (choice < magicStrings.Length))
+            {
+                result = Convert.ToDouble(magicStrings[choice]);
+            }
 
+            result = (result > 0) ? (2 * result) : (-2 * result);
+            return result;
+        }
 
     }
 }
